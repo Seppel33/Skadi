@@ -1,0 +1,212 @@
+@charset "UTF-8";
+@font-face {
+    font-family: 'century-gothic';
+    src: url('fonts/Century Gothic/GOTHIC.TTF') format('truetype');
+}
+
+@font-face {
+    font-family: 'century-gothic-bold';
+    src: url('fonts/Century Gothic/GOTHICB.TTF') format('truetype');
+}
+
+@font-face {
+    font-family: 'asphalts-brush';
+    src: url('fonts/Asphalts Brush.TTF') format('truetype');
+}
+
+body {
+    font-family: century-gothic;
+    font-style: normal;
+    overflow-x: hidden;
+    margin: 0;
+    /*
+    background-position: left bottom; /* Center the image 
+
+    background-repeat: no-repeat; /* Do not repeat the image 
+    background-size: 100%;
+  background-attachment: fixed;
+    background-image: url("temp/mattias-milos-418730-unsplash_sw.jpg");
+   */
+}
+
+#background img {
+    position: absolute;
+    opacity: 0.3;
+    bottom: 0;
+    z-index: -2;
+    background-attachment: scroll;
+}
+
+#background {
+    position: relative;
+}
+
+.responsive {
+    width: 100%;
+    height: auto;
+}
+
+.asphalt {
+    font-family: asphalts-brush;
+    font-style: normal;
+    font-size: 80px;
+    text-align: center;
+    padding-top: 30px;
+    color: #25453c;
+}
+
+.asphalt2 {
+    font-family: asphalts-brush;
+    font-style: normal;
+    font-size: 80px;
+    text-align: center;
+    padding-top: 30px;
+    color: #25453c;
+    margin-top: 19%;
+}
+
+.signin {
+    width: 100%;
+    font-size: 20px;
+    margin-left: 35%;
+}
+
+@media screen and (max-width:600px) {
+    .signin {
+        width: 100%;
+    }
+}
+
+input[type=password],
+input[type=email] {
+    width: 28.5%;
+    height: 50px;
+    animation: forms2 200ms ease-in-out 0s forwards;
+    color: black;
+    border: none;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding-left: 1.5%;
+}
+
+input[type=password]:focus,
+input[type=email]:focus {
+    animation: forms1 200ms ease-in-out 0s forwards;
+}
+
+#required {
+    float: left;
+    font-size: 15px;
+    margin-left: 35%;
+}
+
+#forgotpw {
+    margin-right: 35%;
+    float: right;
+    margin-bottom: 5%;
+}
+
+#buttonsignin {
+    font-size: 20px;
+    width: 30%;
+    border: none;
+    height: 50px;
+    background-color: #6ba998;
+    animation: buttonanimation2 200ms ease-in-out 0s forwards;
+    margin-left: 35%;
+    cursor: pointer;
+}
+
+#buttonsignin:hover {
+    animation: buttonanimation1 200ms ease-in-out 0s forwards;
+}
+
+#benefits {
+    margin-top: 4%;
+    text-align: center;
+    color: #25453c;
+    font-size: 20px;
+}
+
+#buttoncreateaccount {
+    font-size: 20px;
+    width: 30%;
+    border: none;
+    height: 50px;
+    background-color: #6ba998;
+    margin-left: 35%;
+    cursor: pointer;
+    margin-bottom: 30%;
+    margin-top: 6%;
+    animation: buttonanimation2 200ms ease-in-out 0s forwards;
+}
+
+#buttoncreateaccount:hover {
+    animation: buttonanimation1 200ms ease-in-out 0s forwards;
+}
+
+
+/*
+#trapezoid {
+    border-bottom: 2300px solid #b4d3cb;
+    border-left: 500px solid transparent;
+    border-right: 500px solid transparent;
+    height: 0;
+    width: 550px;
+    transform: rotate(270deg);
+    z-index: -1;
+    size: 0;
+    position: absolute;
+    top: 13%;
+    right: 0;
+    float: right;
+}
+*/
+
+#greenbackground {
+    width: 100%;
+    position: relative;
+}
+
+.trapezoid {
+    clip-path: polygon(0 30%, 100% 0, 100% 100%, 0 70%);
+    position: absolute;
+    top: -23%;
+    height: 115%;
+    width: 100%;
+    z-index: -1;
+    background: #b4d3cb;
+}
+
+@keyframes buttonanimation1 {
+    100% {
+        background-color: #558779;
+    }
+}
+
+@keyframes buttonanimation2 {
+    0% {
+        background-color: #558779;
+    }
+    100% {
+        background-color: #6ba998;
+    }
+}
+
+@keyframes forms1 {
+    0% {
+        background-color: #d1e4de;
+    }
+    100% {
+        background-color: #bccdc7;
+    }
+}
+
+@keyframes forms2 {
+    0% {
+        background-color: #bccdc7;
+    }
+    100% {
+        background-color: #d1e4de;
+    }
+}

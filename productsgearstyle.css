@@ -1,0 +1,278 @@
+@charset "UTF-8";
+@font-face {
+    font-family: 'century-gothic';
+    src: url('fonts/Century Gothic/GOTHIC.TTF') format('truetype');
+}
+
+@font-face {
+    font-family: 'century-gothic-bold';
+    src: url('fonts/Century Gothic/GOTHICB.TTF') format('truetype');
+}
+
+@font-face {
+    font-family: 'asphalts-brush';
+    src: url('fonts/Asphalts Brush.ttf') format('truetype');
+}
+
+body {
+    margin: 0;
+    overflow-x: hidden;
+}
+.topnav{
+    position: relative;
+    z-index: 2;
+}
+
+#picture{
+    width: 25%;
+    height: 25%;
+    margin: 12.5%;
+    float: left;
+}
+#selector{
+    width: 27%;
+    height: 25%;
+    margin-left: 2.5%;
+    margin-top: 12.5%;
+    margin-right: 20.5%;
+    position: relative;
+    float: left;
+}
+#header1{
+    font-family: asphalts-brush;
+    font-size: 5vw;
+    color: #25453C;
+}
+#header2{
+    font-family: century-gothic-bold;
+    font-size: 2vw;
+    color: #25453C;
+    margin-bottom: 5%;
+}
+.color{
+    width: 3vw;
+    height: 3vw;
+    margin-right: 5%;
+    float: left;
+    
+}
+#color1{
+    background-color: black;
+    clear: both;
+}
+#color2{
+    background-color: #25453C;
+}
+#color3{
+    background-color: rgb(236, 236, 22);
+}
+#color4{
+    background-color: rgb(55, 55, 204);
+}
+.bold{
+    font-weight: bold;
+}
+.text{
+    float: left;
+    font-family: century-gothic-bold;
+    font-size: 0.9vw;
+    margin-bottom: 3%;
+}
+.size{
+    float: left;
+    margin-top: 3%;
+    width: 217px;
+}
+.sizebutton{
+    margin-right: 10px;
+    width: 45px;
+    height: 30px;
+    background-color: #6BA998;
+    border: none;
+    color: #25453C;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    font-family: century-gothic;
+}
+.s.active{
+    background-color: #416158;
+    color: white;
+}
+.sizebuttonfirst{
+    margin-right: 10px;
+    width: 45px;
+    height: 30px;
+    margin-left: -3px;
+    background-color: #6BA998;
+    border: none;
+    color: #25453C;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    font-family: century-gothic;
+}
+.sizebuttonlast{
+    width: 45px;
+    height: 30px;
+    margin-left: -3px;
+    background-color: #6BA998;
+    border: none;
+    color: #25453C;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    font-family: century-gothic;
+}
+.sizerow1{
+    margin-bottom: 10px;
+    float: left;
+    clear: both;
+}
+.sizerow2{
+    float: left;
+}
+#meet_us {
+    width: 57%;
+    position: relative;
+    clear: both;
+    float: left;
+    margin-top: 7%;
+    z-index: -1;
+    /*animation-name: meet_us;
+    animation-duration: 8s;
+    animation-iteration-count: 1;*/
+}
+
+.clip_meet_us {
+    clip-path: polygon(0 -3%, 100% 25%, 100% 75%, 0 103%);
+    position: absolute;
+    top: -117%;
+    height: 400%;
+    width: 100%;
+}
+
+.img_meet_us {
+    position: absolute;
+    transform: scale(2.6);
+    top: 28%;
+    left: -6%;
+    width: 57%;
+}
+
+.size_clip_meet_us {
+    margin: 13vw;
+}
+
+
+/*@keyframes meet_us {
+    from {
+        transform: translateX(-50%)
+    }
+    to {
+        transform: translateX(0%)
+    }
+}*/
+
+#textrahmen_right {
+    width: 56%;
+    position: relative;
+    clear: both;
+    float: right;
+    margin-top: -4%;
+    z-index: -2;
+    /*animation-name: trapezoid_right;
+    animation-duration: 8s;
+    animation-iteration-count: 1;*/
+}
+
+.trapezoid_right {
+    clip-path: polygon(0 20%, 100% 0, 100% 100%, 0 80%);
+    position: absolute;
+    top: -117%;
+    height: 400%;
+    width: 100%;
+    z-index: -1;
+    background-color: #b4d3cb;
+}
+
+
+/*
+@keyframes trapezoid_right {
+    from {
+        transform: translateX(50%)
+    }
+    to {
+        transform: translateX(0%)
+    }
+}*/
+
+.asphalt {
+    font-family: asphalts-brush;
+    font-size: 5vw;
+    text-align: right;
+    color: #25453c;
+    padding-right: 8%;
+}
+
+#text {
+    font-family: century-gothic;
+    position: relative;
+    font-size: 1vw;
+    text-align: right;
+    padding-right: 8%;
+    line-height: 1.5;
+}
+
+#textrahmen_left {
+    width: 56%;
+    position: relative;
+    clear: both;
+    float: left;
+    margin-top: 33%;
+}
+
+.trapezoid_left {
+    clip-path: polygon(0 0, 100% 20%, 100% 80%, 0 100%);
+    position: absolute;
+    top: -77%;
+    height: 400%;
+    width: 100%;
+    z-index: -1;
+    background-color: #b4d3cb;
+}
+#lastimg{
+    width: 100%;
+height: 60vw;
+overflow: hidden;
+z-index: -3;
+position: relative;
+margin-bottom: -37%;
+}
+#imageL{
+width: 155%;
+left: -51%;
+position: relative;
+opacity: 0.4;
+top: -20%;
+}
+.product{
+    font-family: asphalts-brush;
+    font-size: 4vw;
+    color: #25453c;
+    margin-left: 10%;
+    margin-bottom: 20%;
+}
+#price{
+    font-family: century-gothic;
+    font-size: 4vw;
+    color: #25453c;
+}
+#button{
+    font-family: century-gothic;
+    font-size: 4vw;
+    width: 26%;
+    height: 5%;
+    background-color: #25453C;
+    color: white;
+}

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Skadi - Sign in</title>
+
+    <script src="cookiejs.js"></script>
+    <script src="navi.js"></script>
+    <script>
+        // Original JavaScript code by Chirp Internet: www.chirp.com.au
+        // Please acknowledge use of this code by including this header.
+
+        var today = new Date();
+        var expiry = new Date(today.getTime() + 30 * 24 * 3600 * 1000); // plus 30 days
+
+        function setCookie(cookieform) {
+            // document.cookie=name + "=" + escape(value) + "; path=/; expires=" + expiry.toGMTString();
+            document.cookie = "myAccount=" + JSON.stringify(cookieform) + "; path=/; expires=" + expiry.toGMTString();
+
+            window.open("index.html", "_self");
+
+        }
+
+        function signin() {
+            var email = document.getElementById("emailId").value;
+            var password = document.getElementById("passwordId").value;
+            var cname = "Account: " + email
+            var c = getCookie(cname);
+            var email0 = c.indexOf('email') + 8;
+            var email1 = c.indexOf('password') - 3;
+            var password0 = c.indexOf('password') + 11;
+            var password1 = c.indexOf('loggedin') - 3;
+
+            var checkEmail = c.substring(email0, email1);
+            var checkPassword = c.substring(password0, password1);
+            if ((email == checkEmail) && (password == checkPassword)) {
+                login(cname);
+                window.open("index.html", "_self");
+            }
+        }
+
+        function signuplink() {
+            window.open("signup.html", "_self");
+
+        }
+    </script>
+
+    <!--<link rel="stylesheet" type="text/css" href="indexstyle.css" media="screen">-->
+    <link rel="stylesheet" type="text/css" href="signinstyle.css" media="screen">
+    <link rel="icon" type="image/png" href="res/skadi_logo_small.png">
+    <link rel="stylesheet" type="text/css" href="navigationstyle.css" media="screen">
+
+</head>
+
+<body>
+    <div class="topnav" id="myTopnav">
+        <div class="logo">
+            <a href="index.html"><img src="res/skadi_logo.svg" width="120px"></a>
+        </div>
+        <a href="aboutus.html">About Us</a>
+        <a href="location.html">Location</a>
+        <div class="dropdown">
+            <button class="mainmenu">Snowboard</button>
+            <div class="submenu">
+                <a href="snowboards.html">Precast</a>
+                <hr>
+                <a href="customized.html">Customized</a>
+            </div>
+        </div>
+        <div class="dropdown_gear">
+            <button class="mainmenu">Gear 
+              </button>
+            <div class="submenu">
+                <a href="gearwoman.html">Women</a>
+                <hr>
+                <a href="gearmen.html">Men</a>
+            </div>
+        </div>
+
+        <div class="shopping_cart">
+            <a href="shoppingcart.html"><img src="res/shoppingcart.svg" width="20px"></a>
+        </div>
+
+        <div class="sign_in">
+            <a href="signin.html">
+                <div id="signin" onclick="logout()">Sign in</div>
+            </a>
+        </div>
+
+        <a href="javascript:void(0);" class="icon" onclick="myFunction()">&#9776;</a>
+    </div>
+
+    <div class="asphalt">
+        account
+
+    </div>
+
+    <form action="javascript:signin();">
+        <div class="signin">
+
+            <label for="email">*Email</label>
+            <br>
+            <input type="email" name="email" id="emailId" required>
+            <br><br>
+            <label for="password">*Password</label>
+            <br>
+            <input type="password" name="password" id="passwordId" required>
+        </div>
+
+        <div class="row">
+            <div id="required">
+                *This field is required
+            </div>
+            <div id="forgotpw">Forgot your password? </div>
+            <button type="submit" id="buttonsignin" title="Sign in">Sign in</button>
+        </div>
+    </form>
+
+    <div id="greenbackground">
+        <div class="trapezoid">""</div>
+        <div class="asphalt2">create your account</div>
+
+        <div id="benefits">
+            <b>Membership has its benefits:</b><br>
+            <br>Save your billing and shipping info for faster,<br>easier checkout and gift giving.
+            <br><br> Archive all your purchases for aesier returns<br>and warranties.
+        </div>
+
+        <button onclick="signuplink();" type="submit" id="buttoncreateaccount" title="Create account">Create Account</button>
+
+    </div>
+
+    <div id="background"><img src="temp/stefano-bernardo-663440-unsplash_SW.jpg" class="responsive"></div>
+    <div id="scrollTop">
+        <img src="res/button.svg" onclick="topFunction()" width="50px">
+    </div>
+    <footer>
+        <div class="row1">
+            <div class="footer left">
+                <a href="contactus.html">Contact</a>
+                <br>
+                <br>
+                <a href="impressum.html">Impressum</a>
+            </div>
+
+            <div class="footer middle">
+                <a href="shoppingcart.html">Shopping Cart</a>
+                <br>
+                <br>
+                <a href="newsletter.html">Newsletter</a>
+            </div>
+
+            <div class="footer middle2">
+                <a href="aboutus.html">About us</a>
+                <br>
+                <br>
+                <a href="location.html">Location</a>
+            </div>
+
+            <div class="footer right">
+                <a href="snowboards.html">Snowboard</a>
+                <br>
+                <br>
+                <a href="gearwoman.html">Gear</a>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>

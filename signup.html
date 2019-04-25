@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Skadi - Sign up</title>
+    <link rel="icon" type="image/png" href="res/skadi_logo_small.png">
+
+
+    <script>
+        // Original JavaScript code by Chirp Internet: www.chirp.com.au
+        // Please acknowledge use of this code by including this header.
+
+        var today = new Date();
+        var expiry = new Date(today.getTime() + 30 * 24 * 3600 * 1000); // plus 30 days
+
+        function setCookie(cookieform) {
+            // document.cookie=name + "=" + escape(value) + "; path=/; expires=" + expiry.toGMTString();
+            document.cookie = "Account: " + cookieform.email + "=" + JSON.stringify(cookieform) + "; expires=" + expiry.toGMTString() + "path=/;";
+
+            window.open("index.html", "_self");
+
+        }
+
+
+
+
+        function storeValues() {
+
+
+            var cookieform = {
+                    firstName: "",
+                    lastName: "",
+                    adress: "",
+                    postcode: "",
+                    town: "",
+                    country: "",
+                    birthday: "",
+                    phone: "",
+                    mobilephone: "",
+                    email: "",
+                    password: "",
+                    loggedin: "true"
+                }
+                //["fn","ln","a","p","t","c","bd","ph","mph","e-mail","pw","cpw"];
+
+            cookieform.firstName = document.getElementById("firstnameId").value;
+            cookieform.lastName = document.getElementById("lastnameId").value;
+            cookieform.adress = document.getElementById("adressId").value;
+            cookieform.postcode = document.getElementById("postcodeId").value;
+            cookieform.town = document.getElementById("townId").value;
+            cookieform.country = document.getElementById("countryId").value;
+            cookieform.birthday = document.getElementById("birthdayId").value;
+            cookieform.phone = document.getElementById("phoneId").value;
+            cookieform.mobilephone = document.getElementById("mobilephoneId").value;
+            cookieform.email = document.getElementById("emailId").value;
+            cookieform.password = document.getElementById("passwordId").value;
+
+
+            setCookie(cookieform);
+
+        }
+
+
+        function validatePassword() {
+            var password = document.getElementById("passwordId");
+            var confirmpassword = document.getElementById("confirmpasswordId");
+            if (password.value != confirmpassword.value) {
+                confirmpassword.setCustomValidity("Passwords Don't Match");
+
+            } else {
+                confirmpassword.setCustomValidity('');
+            }
+        }
+    </script>
+    <script src="cookiejs.js"></script>
+    <script src="navi.js"></script>
+    <!--<link rel="stylesheet" type="text/css" href="indexstyle.css" media="screen">-->
+    <link rel="stylesheet" type="text/css" href="signupstyle.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="navigationstyle.css" media="screen">
+
+</head>
+
+<body>
+
+    <div class="topnav" id="myTopnav">
+        <div class="logo">
+            <a href="index.html"><img src="res/skadi_logo.svg" width="120px"></a>
+        </div>
+        <a href="aboutus.html">About Us</a>
+        <a href="location.html">Location</a>
+        <div class="dropdown">
+            <button class="mainmenu">Snowboard</button>
+            <div class="submenu">
+                <a href="snowboards.html">Precast</a>
+                <hr>
+                <a href="customized.html">Customized</a>
+            </div>
+        </div>
+        <div class="dropdown_gear">
+            <button class="mainmenu">Gear 
+              </button>
+            <div class="submenu">
+                <a href="gearwoman.html">Women</a>
+                <hr>
+                <a href="gearmen.html">Men</a>
+            </div>
+        </div>
+
+        <div class="shopping_cart">
+            <a href="shoppingcart.html"><img src="res/shoppingcart.svg" width="20px"></a>
+        </div>
+
+        <div class="sign_in">
+            <a href="#">
+                <div id="signin" onclick="logout()">Sign in</div>
+            </a>
+        </div>
+
+        <a href="javascript:void(0);" class="icon" onclick="myFunction()">&#9776;</a>
+    </div>
+
+
+
+    <div id="head1signup">
+        oh, hello
+
+    </div>
+    <div id="head2signup">
+        nice to meet you
+    </div>
+    <div id="hint">
+        <p>Please fill in this form to create an account.</p>
+
+    </div>
+    <form action="javascript:storeValues();">
+        <div class="row">
+            <div class="signup">
+
+                <label for="firstname">*First Name</label>
+                <br>
+                <input type="text" name="firstname" pattern="[A-Za-zöäüß]{1,}" id="firstnameId" required>
+                <br><br>
+                <label for="lastname">*Last Name</label>
+                <br>
+                <input type="text" name="lastname" pattern="[A-Za-zöäüß]{1,}" id="lastnameId" required>
+
+                <br><br>
+                <label for="adress">*Adress</label>
+                <br>
+                <input type="text" name="adress" pattern="[A-Z a-zöäüß]{1,}" id="adressId" required>
+
+                <br><br>
+                <label for="postcode">*Postcode</label>
+                <br>
+                <input type="text" name="postcode" pattern="[1-9]{5}" id="postcodeId" required>
+
+                <br><br>
+                <label for="town">*Town</label>
+                <br>
+                <input type="text" name="town" pattern="[A-Za-zöäüß]{1,}" id="townId" required>
+
+                <br><br>
+                <label for="country">*Country</label>
+                <br>
+                <input type="text" name="country" pattern="[A-Za-zöäüß]{1,}" id="countryId" required>
+
+            </div>
+            <div class="signup">
+                <label for="birthday">Birthday</label>
+                <br>
+                <input type="date" name="birthday" id="birthdayId">
+                <br><br>
+                <label for="phone">Phone</label>
+                <br>
+                <input type="text" name="phone" pattern="[0-9]{1,}" id="phoneId">
+                <br><br>
+                <label for="mobilephone">Mobile Phone</label>
+                <br>
+                <input type="text" name="mobilephone" pattern="[0-9]{1,}" id="mobilephoneId">
+                <br><br>
+                <label for="email">*E-Mail</label>
+                <br>
+                <input type="email" name="email" id="emailId" required>
+                <br><br>
+
+                <label for="password">*Password</label>
+                <br>
+                <input onkeyup="validatePassword();" type="password" name="password" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" id="passwordId" required>
+                <!--pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"-->
+                <br><br>
+                <label for="confirmpassword">*Confirm Password</label>
+                <br>
+                <input onkeyup="validatePassword();" type="password" name="confirmpassword" id="confirmpasswordId" required>
+
+            </div>
+        </div>
+
+        <div id="required">
+            *This field is required
+        </div>
+
+        <button type="submit" id="button" title="Create account">Create Account</button>
+    </form>
+
+    <div id="info">
+        By creating an account, you agree to Skadi's Privacy Policy and Terms & Conditions.
+    </div>
+
+
+    <div id="background"><img src="temp/mattias-milos-418730-unsplash_sw.jpg" class="responsive"></div>
+    <div id="scrollTop">
+        <img src="res/button.svg" onclick="topFunction()" width="50px">
+    </div>
+    <footer>
+        <div class="row1">
+            <div class="footer left">
+                <a href="contactus.html">Contact</a>
+                <br>
+                <br>
+                <a href="impressum.html">Impressum</a>
+            </div>
+
+            <div class="footer middle">
+                <a href="shoppingcart.html">Shopping Cart</a>
+                <br>
+                <br>
+                <a href="newsletter.html">Newsletter</a>
+            </div>
+
+            <div class="footer middle2">
+                <a href="aboutus.html">About us</a>
+                <br>
+                <br>
+                <a href="location.html">Location</a>
+            </div>
+
+            <div class="footer right">
+                <a href="snowboards.html">Snowboard</a>
+                <br>
+                <br>
+                <a href="gearwoman.html">Gear</a>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>

@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skadi - Men Gear</title>
+    <link rel="icon" type="image/png" href="res/skadi_logo_small.png">
+    <link rel="stylesheet" type="text/css" href="navigationstyle.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="gearstyle.css" media="screen">
+    <style>
+        .topnav {
+            overflow: unset;
+            height: 117px;
+        }
+    </style>
+    <script>
+        function topFunction() {
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+        }
+
+        function myFunction() {
+            var x = document.getElementById("myTopnav");
+            if (x.className === "topnav") {
+                x.className += " responsive";
+            } else {
+                x.className = "topnav";
+            }
+        }
+        var activeArticles = document.getElementsByClassName("article");
+        var activeSizeButtons = [];
+        var firstSelect = true;
+        var pages = parseInt(activeArticles / 9 + 1);
+
+        function sizebuttonmanager(c) {
+            var bool = false;
+            if (!firstSelect) {
+                for (var i = 0; i < activeSizeButtons.length; i++) {
+                    if (activeSizeButtons[i].id.includes(c)) {
+                        var arr1 = activeSizeButtons[i].className.split(" ");
+                        arr1.splice(arr1.indexOf("active"), 1);
+                        activeSizeButtons[i].className = arr1.join(" ");
+                        activeSizeButtons.splice(i, 1);
+                        bool = true;
+                    }
+                }
+            } else {
+                firstSelect = false;
+            }
+            if (!bool) {
+                activeSizeButtons.push(document.getElementById(c));
+                var arr2 = activeSizeButtons[activeSizeButtons.length - 1].className.split(" ");
+                arr2.push("active");
+                activeSizeButtons[activeSizeButtons.length - 1].className = arr2.join(" ");
+
+            }
+            updateArticles();
+        }
+
+        function updateArticles() {
+            resetAllArticles();
+            var arrAllArticles = document.getElementsByClassName("article");
+            var arrCheckedCategoryies = [];
+            var arrCheckedColors = [];
+            var arrCheckedConditions = [];
+            var temp = document.getElementsByClassName("categoryX");
+            for (var i = 0; i < temp.length; i++) {
+                if (temp[i].checked) {
+                    arrCheckedCategoryies.push(temp[i]);
+                }
+            }
+            temp = document.getElementsByClassName("colorX");
+            for (var i = 0; i < temp.length; i++) {
+                if (temp[i].checked) {
+                    arrCheckedColors.push(temp[i]);
+                }
+            }
+            temp = document.getElementsByClassName("conditionX");
+            for (var i = 0; i < temp.length; i++) {
+                if (temp[i].checked) {
+                    arrCheckedConditions.push(temp[i]);
+                }
+            }
+
+            if (arrCheckedCategoryies.length == 0 || arrCheckedCategoryies.length == 4) {
+                activeArticles = arrAllArticles;
+            } else {
+                activeArticles = [];
+                tempActive = [];
+                for (var i = 0; i < arrAllArticles.length; i++) {
+                    for (var h = 0; h < arrCheckedCategoryies.length; h++) {
+                        if (arrAllArticles[i].className.includes(arrCheckedCategoryies[h].value)) {
+                            activeArticles.push(arrAllArticles[i]);
+                            h = arrCheckedCategoryies.length;
+                        }
+                    }
+                }
+            }
+            if (!((arrCheckedColors.length == 0) || (arrCheckedColors.length == 4))) {
+                tempActive = activeArticles;
+                activeArticles = [];
+                for (var i = 0; i < tempActive.length; i++) {
+                    for (var h = 0; h < arrCheckedColors.length; h++) {
+                        if (tempActive[i].className.includes(arrCheckedColors[h].value)) {
+                            activeArticles.push(tempActive[i]);
+                            h = arrCheckedColors.length;
+                        }
+                    }
+                }
+            }
+            if (!((arrCheckedConditions.length == 0) || (arrCheckedConditions.length == 3))) {
+                tempActive = activeArticles;
+                activeArticles = [];
+                for (var i = 0; i < tempActive.length; i++) {
+                    for (var h = 0; h < arrCheckedConditions.length; h++) {
+                        if (tempActive[i].className.includes(arrCheckedConditions[h].value)) {
+                            activeArticles.push(tempActive[i]);
+                            h = arrCheckedConditions.length;
+                        }
+                    }
+                }
+            }
+            if (!((activeSizeButtons.length == 0) || (activeSizeButtons.length == 8))) {
+                tempActive = activeArticles;
+                activeArticles = [];
+                for (var i = 0; i < tempActive.length; i++) {
+                    for (var h = 0; h < activeSizeButtons.length; h++) {
+                        if (tempActive[i].className.includes(activeSizeButtons[h].value)) {
+                            activeArticles.push(tempActive[i]);
+                            h = activeSizeButtons.length;
+                        }
+                    }
+                }
+            }
+
+            for (var i = 0; i < activeArticles.length && i < 9; i++) {
+                var classnameArr = activeArticles[i].className.split(" ");
+                classnameArr.push("show");
+                activeArticles[i].className = classnameArr.join(" ");
+            }
+            updatePageination();
+        }
+
+        function resetAllArticles() {
+            for (var i = 0; i < activeArticles.length; i++) {
+                var arr12 = activeArticles[i].className.split(" ");
+                arr12.splice(arr12.length - 1, 1);
+                activeArticles[i].className = arr12.join(" ");
+            }
+        }
+
+        function updatePageination() {
+            pages = parseInt(activeArticles.length / 9);
+            if (activeArticles.length % 9 != 0) {
+                pages++;
+            }
+            var t = document.getElementsByClassName("pagination");
+            var elements = t[0].getElementsByTagName('a');
+            for (var i = 1; i < elements.length - 1; i++) {
+                elements[i].className = "";
+                elements[i].innerHTML = i;
+                elements[i].value = i;
+            }
+            if (pages < 6) {
+                var diff = 6 - pages;
+                for (var h = 1; h <= diff; h++) {
+                    elements[elements.length - h - 1].className = "nopage";
+                }
+            }
+            clickPage(1);
+        }
+
+        function clickPage(pagevalue) {
+            resetAllArticles();
+            var shownarticles;
+            if (pagevalue == -1) {
+                pagevalue = pages;
+            }
+            var numb;
+            if (pagevalue == pages) {
+                numb = activeArticles.length - (pagevalue - 1) * 9;
+            } else {
+                numb = 9;
+            }
+            for (var i = 0; i < numb; i++) {
+                var classnameArr = activeArticles[i + (pagevalue - 1) * 9].className.split(" ");
+                classnameArr.push("show");
+                activeArticles[i + (pagevalue - 1) * 9].className = classnameArr.join(" ");
+            }
+        }
+        updatePageination();
+    </script>
+    <script src="cookiejs.js"></script>
+    <script src="navi.js"></script>
+
+</head>
+
+<body>
+    <div class="topnav" id="myTopnav">
+        <div class="logo">
+            <a href="index.html"><img src="res/skadi_logo.svg" width="120px"></a>
+        </div>
+        <a href="aboutus.html">About Us</a>
+        <a href="location.html">Location</a>
+        <div class="dropdown">
+            <button class="mainmenu">Snowboard</button>
+            <div class="submenu">
+                <a href="snowboards.html">Precast</a>
+                <hr>
+                <a href="customized.html">Customized</a>
+            </div>
+        </div>
+        <div class="dropdown_gear">
+            <button class="mainmenu">Gear 
+          </button>
+            <div class="submenu">
+                <a href="gearwoman.html">Women</a>
+                <hr>
+                <a href="gearmen.html">Men</a>
+            </div>
+        </div>
+
+        <div class="shopping_cart">
+            <a href="shoppingcart.html"><img src="res/shoppingcart.svg" width="20px"></a>
+        </div>
+
+        <div class="sign_in">
+            <a href="signin.html">
+                <div id="signin" onclick="logout()">Sign in</div>
+            </a>
+        </div>
+
+        <a href="javascript:void(0);" class="icon" onclick="myFunction()">&#9776;</a>
+    </div>
+
+
+
+    <div id="header">
+        <div class="clip_header">
+            <img class="img_header" src="res/gear_header.jpg" alt="" />
+        </div>
+        <div class="size_clip_header"></div>
+    </div>
+    <div class="headline1">
+        all you are
+    </div>
+    <div class="headline2">
+        looking for
+    </div>
+
+    <div class="categories">
+        <div class="all_categories">
+            <div class="category">
+                <div class="text">
+                    category
+                </div>
+                <label class="container">
+                    <input class="categoryX" type="checkbox" name="gloves" value="gloves" onclick="updateArticles()">
+                    <span class="checkmark"></span>gloves<br><br>
+                </label>
+                <label class="container">
+                    <input class="categoryX" type="checkbox" name="hat" value="hat" onclick="updateArticles()">
+                    <span class="checkmark"></span>hat<br><br>
+                </label>
+                <label class="container">
+                    <input class="categoryX" type="checkbox" name="helmet" value="helmet" onclick="updateArticles()">
+                    <span class="checkmark"></span>helmet<br><br>
+                </label>
+                <label class="container">
+                    <input class="categoryX" type="checkbox" name="binding" value="binding" onclick="updateArticles()">
+                    <span class="checkmark"></span>binding
+                </label>
+            </div>
+            <div class="color">
+                <div class="text">
+                    color
+                </div>
+                <label class="container">
+                    <input class="colorX" type="checkbox" name="green" value="green" onclick="updateArticles()">
+                    <span class="checkmark"></span>green<br><br>
+                </label>
+                <label class="container">
+                    <input class="colorX" type="checkbox" name="yellow" value="yellow" onclick="updateArticles()">
+                    <span class="checkmark"></span>yellow<br><br>
+                </label>
+                <label class="container">
+                    <input class="colorX" type="checkbox" name="blue" value="blue" onclick="updateArticles()">
+                    <span class="checkmark"></span>blue<br><br>
+                </label>
+                <label class="container">
+                    <input class="colorX" type="checkbox" name="black" value="black" onclick="updateArticles()">
+                    <span class="checkmark"></span>black
+                </label>
+            </div>
+            <div class="condition">
+                <div class="text">
+                    condition
+                </div>
+                <label class="container">
+                    <input class="conditionX" type="checkbox" name="mild" value="mild" onclick="updateArticles()">
+                    <span class="checkmark"></span>mild<br><br>
+                </label>
+                <label class="container">
+                    <input class="conditionX" type="checkbox" name="cold" value="cold" onclick="updateArticles()">
+                    <span class="checkmark"></span>cold<br><br>
+                </label>
+                <label class="container">
+                    <input class="conditionX" type="checkbox" name="arctic" value="arctic" onclick="updateArticles()">
+                    <span class="checkmark"></span>arctic
+                </label>
+            </div>
+            <div class="size">
+                <div class="text">
+                    size
+                </div>
+                <div class="sizerow1">
+                    <button class="s sizebuttonfirst" id="sizebutton1" value="XS" onclick="sizebuttonmanager('sizebutton1')">XS</button>
+                    <button class="s sizebutton" id="sizebutton2" value="S" onclick="sizebuttonmanager('sizebutton2')">S</button>
+                    <button class="s sizebutton" id="sizebutton3" value="S/M" onclick="sizebuttonmanager('sizebutton3')">S/M</button>
+                    <button class="s sizebuttonlast" id="sizebutton4" value="M" onclick="sizebuttonmanager('sizebutton4')">M</button>
+                </div>
+                <div class="sizerow2">
+                    <button class="s sizebuttonfirst" id="sizebutton5" value="M/L" onclick="sizebuttonmanager('sizebutton5')">M/L</button>
+                    <button class="s sizebutton" id="sizebutton6" value="L" onclick="sizebuttonmanager('sizebutton6')">L</button>
+                    <button class="s sizebutton" id="sizebutton7" value="L/XL" onclick="sizebuttonmanager('sizebutton7')">L/XL</button>
+                    <button class="s sizebuttonlast" id="sizebutton8" value="XL" onclick="sizebuttonmanager('sizebutton8')">XL</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="description">
+        men gear
+    </div>
+    <div class="products">
+        <div class="article hat green mild XS S S/M M M/L L L/XL XL show">
+            <a href="producthats.html">
+                <img class="articleimage" src="res/borealis-black.png" width="100%" />
+                <div class="articletext">
+                    Skadi Cap
+                </div>
+            </a>
+        </div>
+        <div class="article gloves green black mild cold S/M M M/L L L/XL XL show">
+            <a href="productgloves.html">
+                <img class="articleimage" src="res/cn-gloves-black-front.png" width="100%" />
+                <div class="articletext">
+                    Skadi Gloves
+                </div>
+            </a>
+        </div>
+        <div class="article helmet green yellow black mild cold arctic S S/M M M/L L show">
+            <a href="producthelmets.html">
+                <img class="articleimage" src="res/helm.jpg" width="100%" />
+                <div class="articletext">
+                    Skadi Helmet
+                </div>
+            </a>
+        </div>
+        <div class="article binding green yellow black blue mild cold arctic XS S S/M M M/L L show">
+            <a href="productbindings.html">
+                <img class="articleimage" src="res/cosmic-coral-front.png" width="100%" />
+                <div class="articletext">
+                    Skadi Binding
+                </div>
+            </a>
+        </div>
+        <div class="article hat green mild XS S S/M M M/L L L/XL XL show">
+            <a href="producthats.html">
+                <img class="articleimage" src="res/borealis-black.png" width="100%" />
+                <div class="articletext">
+                    Skadi Cap
+                </div>
+            </a>
+        </div>
+        <div class="article gloves green black mild cold S/M M M/L L L/XL XL show">
+            <a href="productgloves.html">
+                <img class="articleimage" src="res/cn-gloves-black-front.png" width="100%" />
+                <div class="articletext">
+                    Skadi Gloves
+                </div>
+            </a>
+        </div>
+        <div class="article helmet green yellow black mild cold arctic S S/M M M/L L show">
+            <a href="producthelmets.html">
+                <img class="articleimage" src="res/helm.jpg" width="100%" />
+                <div class="articletext">
+                    Skadi Helmet
+                </div>
+            </a>
+        </div>
+        <div class="article binding green yellow black blue mild cold arctic XS S S/M M M/L L show">
+            <a href="productbindings.html">
+                <img class="articleimage" src="res/cosmic-coral-front.png" width="100%" />
+                <div class="articletext">
+                    Skadi Binding
+                </div>
+            </a>
+        </div>
+        <div class="article hat green mild XS S S/M M M/L L L/XL XL show">
+            <a href="producthats.html">
+                <img class="articleimage" src="res/borealis-black.png" width="100%" />
+                <div class="articletext">
+                    Skadi Cap
+                </div>
+            </a>
+        </div>
+        <div class="article gloves green black mild cold S/M M M/L L L/XL XL">
+            <a href="productgloves.html">
+                <img class="articleimage" src="res/cn-gloves-black-front.png" width="100%" />
+                <div class="articletext">
+                    Skadi Gloves
+                </div>
+            </a>
+        </div>
+        <div class="article helmet green yellow black mild cold arctic S S/M M M/L L">
+            <a href="producthelmets.html">
+                <img class="articleimage" src="res/helm.jpg" width="100%" />
+                <div class="articletext">
+                    Skadi Helmet
+                </div>
+            </a>
+        </div>
+        <div class="article binding green yellow black blue mild cold arctic XS S S/M M M/L L">
+            <a href="productbindings.html">
+                <img class="articleimage" src="res/cosmic-coral-front.png" width="100%" />
+                <div class="articletext">
+                    Skadi Binding
+                </div>
+            </a>
+        </div>
+        <div class="article hat green mild XS S S/M M M/L L L/XL XL">
+            <a href="producthats.html">
+                <img class="articleimage" src="res/borealis-black.png" width="100%" />
+                <div class="articletext">
+                    Skadi Cap
+                </div>
+            </a>
+        </div>
+        <div class="article gloves green black mild cold S/M M M/L L L/XL XL">
+            <a href="productgloves.html">
+                <img class="articleimage" src="res/cn-gloves-black-front.png" width="100%" />
+                <div class="articletext">
+                    Skadi Gloves
+                </div>
+            </a>
+        </div>
+        <div class="article helmet green yellow black mild cold arctic S S/M M M/L L">
+            <a href="producthelmets.html">
+                <img class="articleimage" src="res/helm.jpg" width="100%" />
+                <div class="articletext">
+                    Skadi Helmet
+                </div>
+            </a>
+        </div>
+        <div class="article binding green yellow black blue mild cold arctic XS S S/M M M/L L">
+            <a href="productbindings.html">
+                <img class="articleimage" src="res/cosmic-coral-front.png" width="100%" />
+                <div class="articletext">
+                    Skadi Binding
+                </div>
+            </a>
+        </div>
+        <div class="article hat green mild XS S S/M M M/L L L/XL XL">
+            <a href="producthats.html">
+                <img class="articleimage" src="res/borealis-black.png" width="100%" />
+                <div class="articletext">
+                    Skadi Cap
+                </div>
+            </a>
+        </div>
+        <div class="article gloves green black mild cold S/M M M/L L L/XL XL">
+            <a href="productgloves.html">
+                <img class="articleimage" src="res/cn-gloves-black-front.png" width="100%" />
+                <div class="articletext">
+                    Skadi Gloves
+                </div>
+            </a>
+        </div>
+        <div class="article helmet green yellow black mild cold arctic S S/M M M/L L">
+            <a href="producthelmets.html">
+                <img class="articleimage" src="res/helm.jpg" width="100%" />
+                <div class="articletext">
+                    Skadi Helmet
+                </div>
+            </a>
+        </div>
+        <div class="article binding green yellow black blue mild cold arctic XS S S/M M M/L L">
+            <a href="productbindings.html">
+                <img class="articleimage" src="res/cosmic-coral-front.png" width="100%" />
+                <div class="articletext">
+                    Skadi Binding
+                </div>
+            </a>
+        </div>
+        <div class="article hat green mild XS S S/M M M/L L L/XL XL">
+            <a href="producthats.html">
+                <img class="articleimage" src="res/borealis-black.png" width="100%" />
+                <div class="articletext">
+                    Skadi Cap
+                </div>
+            </a>
+        </div>
+        <div class="article gloves green black mild cold S/M M M/L L L/XL XL">
+            <a href="productgloves.html">
+                <img class="articleimage" src="res/cn-gloves-black-front.png" width="100%" />
+                <div class="articletext">
+                    Skadi Gloves
+                </div>
+            </a>
+        </div>
+        <div class="article helmet green yellow black mild cold arctic S S/M M M/L L">
+            <a href="producthelmets.html">
+                <img class="articleimage" src="res/helm.jpg" width="100%" />
+                <div class="articletext">
+                    Skadi Helmet
+                </div>
+            </a>
+        </div>
+        <div class="article binding green yellow black blue mild cold arctic XS S S/M M M/L L">
+            <a href="productbindings.html">
+                <img class="articleimage" src="res/cosmic-coral-front.png" width="100%" />
+                <div class="articletext">
+                    Skadi Binding
+                </div>
+            </a>
+        </div>
+        <div class="article hat green mild XS S S/M M M/L L L/XL XL">
+            <a href="producthats.html">
+                <img class="articleimage" src="res/borealis-black.png" width="100%" />
+                <div class="articletext">
+                    Skadi Cap
+                </div>
+            </a>
+        </div>
+        <div class="article gloves green black mild cold S/M M M/L L L/XL XL">
+            <a href="productgloves.html">
+                <img class="articleimage" src="res/cn-gloves-black-front.png" width="100%" />
+                <div class="articletext">
+                    Skadi Gloves
+                </div>
+            </a>
+        </div>
+        <div class="article helmet green yellow black mild cold arctic S S/M M M/L L">
+            <a href="producthelmets.html">
+                <img class="articleimage" src="res/helm.jpg" width="100%" />
+                <div class="articletext">
+                    Skadi Helmet
+                </div>
+            </a>
+        </div>
+        <div class="article binding green yellow black blue mild cold arctic XS S S/M M M/L L">
+            <a href="productbindings.html">
+                <img class="articleimage" src="res/cosmic-coral-front.png" width="100%" />
+                <div class="articletext">
+                    Skadi Binding
+                </div>
+            </a>
+        </div>
+        <div class="article hat green mild XS S S/M M M/L L L/XL XL">
+            <a href="producthats.html">
+                <img class="articleimage" src="res/borealis-black.png" width="100%" />
+                <div class="articletext">
+                    Skadi Cap
+                </div>
+            </a>
+        </div>
+
+    </div>
+
+    <div class="centerpage">
+        <div class="pagination">
+            <a onclick="clickPage(value)" value="1">&laquo;</a>
+            <a onclick="clickPage(value)" value="1" class="activepage">1</a>
+            <a onclick="clickPage(value)" value="2">2</a>
+            <a onclick="clickPage(value)" value="3">3</a>
+            <a onclick="clickPage(value)" value="4">4</a>
+            <a onclick="clickPage(value)" value="5" class="nopage">5</a>
+            <a onclick="clickPage(value)" value="6" class="nopage">6</a>
+            <a onclick="clickPage(value)" value="-1">&raquo;</a>
+        </div>
+    </div>
+
+    <div id="have_fun">
+        <div class="clip_have_fun">
+        </div>
+    </div>
+    <div id="scrollTop">
+        <img src="res/button.svg" onclick="topFunction()" width="50px">
+    </div>
+    <footer>
+        <div class="row1">
+            <div class="footer left">
+                <a href="contactus.html">Contact</a>
+                <br>
+                <br>
+                <a href="impressum.html">Impressum</a>
+            </div>
+
+            <div class="footer middle">
+                <a href="shoppingcart.html">Shopping Cart</a>
+                <br>
+                <br>
+                <a href="newsletter.html">Newsletter</a>
+            </div>
+
+            <div class="footer middle2">
+                <a href="aboutus.html">About us</a>
+                <br>
+                <br>
+                <a href="location.html">Location</a>
+            </div>
+
+            <div class="footer right">
+                <a href="snowboards.html">Snowboard</a>
+                <br>
+                <br>
+                <a href="gearwoman.html">Gear</a>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>

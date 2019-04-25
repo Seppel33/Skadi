@@ -1,0 +1,164 @@
+@charset "UTF-8";
+@font-face {
+    font-family: 'century-gothic';
+    src: url('fonts/Century Gothic/GOTHIC.TTF') format('truetype');
+}
+
+@font-face {
+    font-family: 'century-gothic-bold';
+    src: url('fonts/Century Gothic/GOTHICB.TTF') format('truetype');
+}
+
+@font-face {
+    font-family: 'asphalts-brush';
+    src: url('fonts/Asphalts Brush.TTF') format('truetype');
+}
+
+body {
+    font-family: century-gothic;
+    font-style: normal;
+    width: 100%;
+    overflow-x: hidden;
+    margin: 0;
+    /*
+    background-position: left bottom; /* Center the image 
+
+    background-repeat: no-repeat; /* Do not repeat the image 
+    background-size: 100%;
+  background-attachment: fixed;
+    background-image: url("temp/mattias-milos-418730-unsplash_sw.jpg");
+   */
+}
+
+#background img {
+    position: absolute;
+    opacity: 0.3;
+    bottom: 0;
+    z-index: -2;
+    background-attachment: scroll;
+}
+
+#background {
+    position: relative;
+}
+
+.responsive {
+    width: 100%;
+    height: auto;
+}
+
+.asphalt {
+    font-family: asphalts-brush;
+    font-style: normal;
+    font-size: 80px;
+    text-align: center;
+    padding-top: 30px;
+    color: #25453c;
+}
+
+.newsletter {
+    width: 100%;
+    font-size: 20px;
+    margin-left: 35%;
+}
+
+@media screen and (max-width:600px) {
+    .signin {
+        width: 100%;
+    }
+}
+
+#thank {
+    text-align: center;
+    font-size: 50px;
+    position: relative;
+    background-color: white;
+    opacity: 0.8;
+    padding: 20px;
+    margin-left: 23%;
+    margin-right: 23%;
+    width: 54%;
+    visibility: hidden;
+    top: 350px;
+}
+
+input[type=email] {
+    width: 28.5%;
+    height: 50px;
+    animation: forms2 200ms ease-in-out 0s forwards;
+    color: black;
+    border: none;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding-left: 1.5%;
+}
+
+input[type=email]:focus {
+    animation: forms1 200ms ease-in-out 0s forwards;
+}
+
+#required {
+    float: left;
+    font-size: 15px;
+    margin-left: 35%;
+    margin-bottom: 10%;
+}
+
+#buttonnewsletter {
+    font-size: 20px;
+    width: 30%;
+    border: none;
+    height: 50px;
+    background-color: #6ba998;
+    animation: buttonanimation2 200ms ease-in-out 0s forwards;
+    margin-left: 35%;
+    cursor: pointer;
+    margin-bottom: 2%;
+}
+
+#buttonnewsletter:hover {
+    animation: buttonanimation1 200ms ease-in-out 0s forwards;
+}
+
+#info {
+    color: gray;
+    font-size: 12px;
+    text-align: center;
+    position: relative;
+    top: 10px;
+    margin-top: 20px;
+    margin-bottom: 20%;
+}
+
+@keyframes buttonanimation1 {
+    100% {
+        background-color: #558779;
+    }
+}
+
+@keyframes buttonanimation2 {
+    0% {
+        background-color: #558779;
+    }
+    100% {
+        background-color: #6ba998;
+    }
+}
+
+@keyframes forms1 {
+    0% {
+        background-color: #d1e4de;
+    }
+    100% {
+        background-color: #bccdc7;
+    }
+}
+
+@keyframes forms2 {
+    0% {
+        background-color: #bccdc7;
+    }
+    100% {
+        background-color: #d1e4de;
+    }
+}
